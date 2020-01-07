@@ -41,6 +41,7 @@ const Gazetteer = require('../../../react-component/location/gazetteer.js')
 
 import MapSettings from '../../../react-component/map-settings'
 import MapInfo from '../../../react-component/map-info'
+import MapLabels from '../../../react-component/map-labels'
 
 function findExtreme({ objArray, property, comparator }) {
   if (objArray.length === 0) {
@@ -241,6 +242,12 @@ module.exports = Marionette.LayoutView.extend({
       this.handleMeasurementStateChange.bind(this)
     )
 
+    this.listenTo(
+      user.get('user').get('preferences'),
+      'change:showLabels',
+      this.handleLabelChange.bind(this)
+    )
+
     if (this.options.selectionInterface.getSelectedResults().length > 0) {
       this.map.zoomToSelected(
         this.options.selectionInterface.getSelectedResults()
@@ -314,6 +321,18 @@ module.exports = Marionette.LayoutView.extend({
           '</div>'
       )
   },
+  addLabels() {
+    const MapLabelsView = Marionette.ItemView.extend({
+      template() {
+        return <MapLabels />
+      },
+    })
+    this.$el
+      .find('.cesium-viewer-toolbar')
+      .append('<div class="toolbar-labels is-button"></div>')
+    this.addRegion('toolbarLabels', '.toolbar-labels')
+    this.toolbarLabels.show(new MapLabelsView())
+  },
   addSettings() {
     const MapSettingsView = Marionette.ItemView.extend({
       template() {
@@ -350,6 +369,9 @@ module.exports = Marionette.LayoutView.extend({
       target,
       targetMetacard,
     })
+  },
+  handleLabelChange() {
+      console.log('hi');
   },
   /*
     Handles drawing or clearing the ruler as needed by the measurement state.
@@ -459,6 +481,7 @@ module.exports = Marionette.LayoutView.extend({
     this.addPanZoom()
     this.addHome()
     this.addClustering()
+    this.addLabels()
     this.addLayers()
     this.addSettings()
     this.endLoading()

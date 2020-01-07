@@ -145,6 +145,8 @@ User.Preferences = Backbone.AssociatedModel.extend({
       dateTimeFormat: Common.getDateTimeFormats()['ISO'],
       timeZone: Common.getTimeZones()['UTC'],
       coordinateFormat: 'degrees',
+      showLabels: true,
+      labelAttribute: 'title',
       goldenLayout: undefined,
       goldenLayoutUpload: undefined,
       goldenLayoutMetacard: undefined,
