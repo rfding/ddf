@@ -52,7 +52,7 @@ class MapLabels extends React.Component<WithBackboneProps, State> {
     this.props.listenTo(
       user.get('user').get('preferences'),
       'change:labelAttribute',
-      (_prefs: any, value: string) => this.setState({ selected: value, })
+      (_prefs: any, value: string) => this.setState({ selected: value })
     )
 
   updateAttrib(newAttrib: string) {

@@ -82,12 +82,15 @@ class LabelsPresentation extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      showLabels: user.get('user').get('preferences').get('showLabels')
+      showLabels: user
+        .get('user')
+        .get('preferences')
+        .get('showLabels'),
     }
   }
 
   toggleShowLabels = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     console.log('clicked')
     const newState = !this.state.showLabels
     const preferences = user.get('user').get('preferences')
@@ -103,9 +106,25 @@ class LabelsPresentation extends React.Component<Props, State> {
       <Root>
         {/* TODO: insert button to toggle labels */}
         <Button>
-            <Label>Show Labels</Label>
-            <Span id="toggle-labels-off" className={!this.state.showLabels ? "fa fa-toggle-off is-button is-labeling" : "fa fa-toggle-off is-button"} onClick={this.toggleShowLabels}/>
-            <Span id="toggle-labels-on" className={this.state.showLabels ? "fa fa-toggle-on is-button is-labeling" : "fa fa-toggle-on is-button"} onClick={this.toggleShowLabels}/>
+          <Label>Show Labels</Label>
+          <Span
+            id="toggle-labels-off"
+            className={
+              !this.state.showLabels
+                ? 'fa fa-toggle-off is-button is-labeling'
+                : 'fa fa-toggle-off is-button'
+            }
+            onClick={this.toggleShowLabels}
+          />
+          <Span
+            id="toggle-labels-on"
+            className={
+              this.state.showLabels
+                ? 'fa fa-toggle-on is-button is-labeling'
+                : 'fa fa-toggle-on is-button'
+            }
+            onClick={this.toggleShowLabels}
+          />
         </Button>
 
         <Enum

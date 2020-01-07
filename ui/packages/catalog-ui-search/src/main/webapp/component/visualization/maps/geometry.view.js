@@ -135,9 +135,15 @@ const GeometryView = Marionette.ItemView.extend({
         view: this,
       })
     )
-    const showLabels = user.get('user').get('preferences').get('showLabels')
+    const showLabels = user
+      .get('user')
+      .get('preferences')
+      .get('showLabels')
     console.log(showLabels)
-    const labelAttrib = user.get('user').get('preferences').get('labelAttribute')
+    const labelAttrib = user
+      .get('user')
+      .get('preferences')
+      .get('labelAttribute')
     // adds an additional map element to the geometry for the label
     if (showLabels) {
       const attribute = this.model

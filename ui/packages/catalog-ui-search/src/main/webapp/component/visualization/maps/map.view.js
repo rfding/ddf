@@ -371,7 +371,7 @@ module.exports = Marionette.LayoutView.extend({
     })
   },
   handleLabelChange() {
-      console.log('hi');
+    console.log('hi')
   },
   /*
     Handles drawing or clearing the ruler as needed by the measurement state.

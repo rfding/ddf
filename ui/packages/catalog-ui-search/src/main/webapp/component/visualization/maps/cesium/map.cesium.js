@@ -945,7 +945,10 @@ module.exports = function CesiumMap(
          Updates a passed in geometry to be shown
          */
     showGeometry(geometry) {
-      const showLabels = user.get('user').get('preferences').get('showLabels');
+      const showLabels = user
+        .get('user')
+        .get('preferences')
+        .get('showLabels')
       if (geometry.constructor === Cesium.Billboard) {
         geometry.show = true
       } else if (showLabels && geometry.constructor === Cesium.Label) {
