@@ -104,7 +104,6 @@ class LabelsPresentation extends React.Component<Props, State> {
   render() {
     return (
       <Root>
-        {/* TODO: insert button to toggle labels */}
         <Button>
           <Label>Show Labels</Label>
           <Span
@@ -130,7 +129,19 @@ class LabelsPresentation extends React.Component<Props, State> {
         <Enum
           options={[
             { label: 'Title', value: 'title' },
-            { label: 'Date', value: 'date' },
+            { label: 'Created', value: 'created' },
+            { label: 'Modified', value: 'modified' },
+            { label: 'Checksum', value: 'checksum' },
+            { label: 'Checksum Algorithm', value: 'checksum-algorithm' },
+            { label: 'Effective', value: 'effective' },
+            { label: 'ID', value: 'id' },
+            { label: 'Metacard Created', value: 'metacard.created' },
+            { label: 'Metacard Modified', value: 'metacard.modified' },
+            { label: 'Point of Contact', value: 'point-of-contact' },
+            { label: 'Resource Download URL', value: 'resource-download-url' },
+            { label: 'Resource Size', value: 'resource-size' },
+            { label: 'Resource URI', value: 'resource-uri' },
+            { label: 'Source ID', value: 'source-id' },
           ]}
           value={this.props.selected}
           label="Label Attribute"
@@ -140,30 +151,6 @@ class LabelsPresentation extends React.Component<Props, State> {
     )
   }
 }
-
-// const render = (props: Props) => {
-//   const { selected, updateAttrib, toggleShowLabels } = props
-//   return (
-//     <Root>
-//       {/* TODO: insert button to toggle labels */}
-//       <Button>
-//           <Label>Show Labels</Label>
-//           <Span id="toggle-labels-off" className="fa fa-toggle-off is-button" onClick={() => toggleShowLabels}/>
-//           <Span id="toggle-labels-on" className="fa fa-toggle-on is-button is-labeling" onClick={() => toggleShowLabels}/>
-//       </Button>
-
-//       <Enum
-//         options={[
-//           { label: 'Title', value: 'title' },
-//           { label: 'Date', value: 'date' },
-//         ]}
-//         value={selected}
-//         label="Label Attribute"
-//         onChange={updateAttrib}
-//       />
-//     </Root>
-//   )
-// }
 
 export default hot(module)(LabelsPresentation)
 // export const testComponent = LabelsPresentation

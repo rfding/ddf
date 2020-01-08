@@ -371,6 +371,7 @@ module.exports = Marionette.LayoutView.extend({
     })
   },
   handleLabelChange() {
+    // TODO: update labels in real time
     console.log('hi')
   },
   /*

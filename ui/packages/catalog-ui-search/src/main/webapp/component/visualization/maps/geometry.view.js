@@ -139,7 +139,6 @@ const GeometryView = Marionette.ItemView.extend({
       .get('user')
       .get('preferences')
       .get('showLabels')
-    console.log(showLabels)
     const labelAttrib = user
       .get('user')
       .get('preferences')
