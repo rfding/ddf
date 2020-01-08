@@ -110,7 +110,7 @@ class LabelsPresentation extends React.Component<Props, State> {
           <Span
             id="toggle-labels-off"
             className={
-              !this.state.showLabels
+              this.state.showLabels
                 ? 'fa fa-toggle-off is-button is-labeling'
                 : 'fa fa-toggle-off is-button'
             }
@@ -119,7 +119,7 @@ class LabelsPresentation extends React.Component<Props, State> {
           <Span
             id="toggle-labels-on"
             className={
-              this.state.showLabels
+              !this.state.showLabels
                 ? 'fa fa-toggle-on is-button is-labeling'
                 : 'fa fa-toggle-on is-button'
             }
