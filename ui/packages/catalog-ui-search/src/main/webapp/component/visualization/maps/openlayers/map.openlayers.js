@@ -178,6 +178,16 @@ module.exports = function OpenlayersMap(
    * If findSelected is true, look for a selected label to display (set to false when setting isSelected for labels).
    */
   function showHideLabel(isSelected, findSelected, geometry, feature) {
+    const showLabels = user
+      .get('user')
+      .get('preferences')
+      .get('showLabels')
+
+    if (!showLabels) {
+      geometry.setVisible(false)
+      return
+    }
+
     const geometryInstance = feature.getGeometry()
     const labelWithSamePosition = findOverlappingLabel(
       findSelected,
@@ -560,6 +570,7 @@ module.exports = function OpenlayersMap(
         zIndex: 1,
         id: options.id,
         isSelected: false,
+        visible: options.show,
       })
 
       map.addLayer(vectorLayer)
@@ -786,6 +797,10 @@ module.exports = function OpenlayersMap(
       } else {
         geometry.setVisible(true)
       }
+    },
+    showHideLabel(label) {
+      const feature = label.getSource().getFeatures()[0]
+      showHideLabel(false, true, label, feature)
     },
     removeGeometry(geometry) {
       map.removeLayer(geometry)

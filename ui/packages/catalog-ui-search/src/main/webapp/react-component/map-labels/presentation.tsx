@@ -24,6 +24,14 @@ type Props = {
   updateAttrib: (selected: string) => void
 }
 
+const updateAttrib = (newAttrib: boolean) => {
+  const preferences = user.get('user').get('preferences')
+  preferences.set({
+    showLabels: newAttrib,
+  })
+  preferences.savePreferences()
+}
+
 const Root = styled.div`
   overflow: auto;
   min-width: ${props => props.theme.minimumScreenSize};
@@ -86,14 +94,9 @@ class LabelsPresentation extends React.Component<Props> {
     }
   }
 
-  toggleShowLabels = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault()
+  toggleShowLabels = () => {
     const newState = !this.props.showLabels
-    const preferences = user.get('user').get('preferences')
-    preferences.set({
-      showLabels: newState,
-    })
-    preferences.savePreferences()
+    updateAttrib(newState)
   }
 
   render() {

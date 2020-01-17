@@ -281,6 +281,16 @@ module.exports = function CesiumMap(
     * If findSelected is true, look for a selected label to display (set to false when setting isSelected for labels).
     */
   function showHideLabel(isSelected, findSelected, geometry) {
+    const showLabels = user
+      .get('user')
+      .get('preferences')
+      .get('showLabels')
+
+    if (!showLabels) {
+      geometry.show = false
+      return
+    }
+
     const labelWithSamePosition = findOverlappingLabel(findSelected, geometry)
     if (isSelected) {
       if (labelWithSamePosition !== undefined) {
@@ -721,6 +731,7 @@ module.exports = function CesiumMap(
         outlineColor: Cesium.Color.WHITE,
         outlineWidth: 10,
         style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        show: options.show,
       })
       mapModel.addLabel(labelRef)
 
@@ -958,6 +969,10 @@ module.exports = function CesiumMap(
           polyline.show = true
         })
       }
+      map.scene.requestRender()
+    },
+    showHideLabel(label) {
+      showHideLabel(false, true, label)
       map.scene.requestRender()
     },
     removeGeometry(geometry) {

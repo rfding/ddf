@@ -144,19 +144,18 @@ const GeometryView = Marionette.ItemView.extend({
       .get('preferences')
       .get('labelAttribute')
     // adds an additional map element to the geometry for the label
-    if (showLabels) {
-      const attribute = this.model
-        .get('metacard')
-        .get('properties')
-        .get(labelAttrib)
-      // use an empty string if there is no metacard attribute set
-      this.geometry.push(
-        this.options.map.addLabel(point, {
-          id: `${this.model.id}-label`,
-          text: attribute !== undefined ? attribute : '',
-        })
-      )
-    }
+    const attribute = this.model
+      .get('metacard')
+      .get('properties')
+      .get(labelAttrib)
+    // use an empty string if there is no metacard attribute set
+    this.geometry.push(
+      this.options.map.addLabel(point, {
+        id: `${this.model.id}-label`,
+        text: attribute !== undefined ? attribute : '',
+        show: showLabels,
+      })
+    )
   },
   handleLine(line) {
     this.geometry.push(

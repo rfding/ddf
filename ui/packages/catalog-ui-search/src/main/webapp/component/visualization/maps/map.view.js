@@ -371,8 +371,9 @@ module.exports = Marionette.LayoutView.extend({
     })
   },
   handleLabelChange() {
-    // TODO: update labels in real time
-    console.log('hi')
+    this.mapModel.get('labels').forEach(label => {
+      this.map.showHideLabel(label)
+    })
   },
   /*
     Handles drawing or clearing the ruler as needed by the measurement state.
