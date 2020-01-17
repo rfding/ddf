@@ -35,6 +35,7 @@ const Span = styled.span`
 `
 type State = {
   selected: string
+  showLabels: boolean
 }
 
 class MapLabels extends React.Component<WithBackboneProps, State> {
@@ -45,15 +46,25 @@ class MapLabels extends React.Component<WithBackboneProps, State> {
         .get('user')
         .get('preferences')
         .get('labelAttribute'),
+      showLabels: user
+        .get('user')
+        .get('preferences')
+        .get('showLabels'),
     }
   }
 
-  componentDidMount = () =>
+  componentDidMount = () => {
     this.props.listenTo(
       user.get('user').get('preferences'),
       'change:labelAttribute',
       (_prefs: any, value: string) => this.setState({ selected: value })
     )
+    this.props.listenTo(
+      user.get('user').get('preferences'),
+      'change:showLabels',
+      (_prefs: any, value: boolean) => this.setState({ showLabels: value })
+    )
+  }
 
   updateAttrib(newAttrib: string) {
     saveAttrib(newAttrib)
@@ -61,10 +72,11 @@ class MapLabels extends React.Component<WithBackboneProps, State> {
   }
 
   render() {
-    const { selected } = this.state
+    const { selected, showLabels } = this.state
 
     const mapLabelsProps = {
       selected,
+      showLabels,
       updateAttrib: (newAttrib: string) => this.updateAttrib(newAttrib),
     }
 

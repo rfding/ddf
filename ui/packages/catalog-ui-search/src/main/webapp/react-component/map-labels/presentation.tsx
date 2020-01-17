@@ -20,11 +20,8 @@ const user = require('../../component/singletons/user-instance.js')
 
 type Props = {
   selected: string
-  updateAttrib: (selected: string) => void
-}
-
-type State = {
   showLabels: boolean
+  updateAttrib: (selected: string) => void
 }
 
 const Root = styled.div`
@@ -78,7 +75,7 @@ const Span = styled.span`
   }
 `
 
-class LabelsPresentation extends React.Component<Props, State> {
+class LabelsPresentation extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -91,14 +88,12 @@ class LabelsPresentation extends React.Component<Props, State> {
 
   toggleShowLabels = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault()
-    console.log('clicked')
-    const newState = !this.state.showLabels
+    const newState = !this.props.showLabels
     const preferences = user.get('user').get('preferences')
     preferences.set({
       showLabels: newState,
     })
     preferences.savePreferences()
-    this.setState({ showLabels: newState })
   }
 
   render() {
@@ -109,7 +104,7 @@ class LabelsPresentation extends React.Component<Props, State> {
           <Span
             id="toggle-labels-off"
             className={
-              this.state.showLabels
+              this.props.showLabels
                 ? 'fa fa-toggle-off is-button is-labeling'
                 : 'fa fa-toggle-off is-button'
             }
@@ -118,7 +113,7 @@ class LabelsPresentation extends React.Component<Props, State> {
           <Span
             id="toggle-labels-on"
             className={
-              !this.state.showLabels
+              !this.props.showLabels
                 ? 'fa fa-toggle-on is-button is-labeling'
                 : 'fa fa-toggle-on is-button'
             }
