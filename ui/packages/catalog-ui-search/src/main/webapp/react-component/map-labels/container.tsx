@@ -20,6 +20,7 @@ import { hot } from 'react-hot-loader'
 import withListenTo, {
   WithBackboneProps,
 } from '../../react-component/backbone-container'
+const announcement = require('../../component/announcement')
 const user = require('../../component/singletons/user-instance.js')
 
 const saveAttrib = (newAttrib: string) => {
@@ -69,6 +70,11 @@ class MapLabels extends React.Component<WithBackboneProps, State> {
   updateAttrib(newAttrib: string) {
     saveAttrib(newAttrib)
     this.setState({ selected: newAttrib })
+    announcement.announce({
+      title: 'Label attribute changed',
+      message: 'Re-run search to update map labels.',
+      type: 'success',
+    })
   }
 
   render() {
